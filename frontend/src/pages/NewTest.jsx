@@ -7,7 +7,7 @@ import {
   RefreshCw, Zap, FileText, X, Info
 } from 'lucide-react';
 
-const API = import.meta.env.VITE_BACKEND_URL;
+const API = import.meta.env.VITE_BACKEND_URL || '';
 
 const KIT_TYPES = [
   { id: 'KIT-A', name: 'Scott Reagent (Cocaine)', colors: { positive: '#3b82f6', negative: '#e2e8f0' } },

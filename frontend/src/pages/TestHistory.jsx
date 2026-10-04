@@ -4,7 +4,7 @@ import axios from 'axios';
 import { Search, Filter, Clock, MapPin, ArrowRight, Activity, ChevronLeft, ChevronRight } from 'lucide-react';
 import ResultBadge from '../components/ResultBadge';
 
-const API = import.meta.env.VITE_BACKEND_URL;
+const API = import.meta.env.VITE_BACKEND_URL || '';
 const RESULTS = ['ALL', 'POSITIVE', 'NEGATIVE', 'INCONCLUSIVE'];
 
 export default function TestHistory() {

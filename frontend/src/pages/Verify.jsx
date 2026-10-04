@@ -3,7 +3,7 @@ import { useSearchParams } from 'react-router-dom';
 import axios from 'axios';
 import { Shield, Search, CheckCircle, XCircle, Hash, FileSignature, MapPin, Clock } from 'lucide-react';
 
-const API = import.meta.env.VITE_BACKEND_URL;
+const API = import.meta.env.VITE_BACKEND_URL || '';
 
 function CheckRow({ ok, label, desc }) {
   return (

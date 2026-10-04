@@ -16,6 +16,22 @@ app.use(express.urlencoded({ extended: true, limit: '30mb' }));
 // Serve uploaded images statically
 app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
 
+// Ensure database & keys are initialized before processing routes
+app.use(async (req, res, next) => {
+  if (!global.PRIVATE_KEY) {
+    const { privateKey, publicKey } = generateKeyPair();
+    global.PRIVATE_KEY = privateKey;
+    global.PUBLIC_KEY = publicKey;
+  }
+  try {
+    await connectDB();
+    next();
+  } catch (err) {
+    console.error('Database connection error in request middleware:', err);
+    res.status(503).json({ error: 'Database service unavailable' });
+  }
+});
+
 // ── Routes ───────────────────────────────────────────────────────────────────
 app.use('/api/auth', require('./routes/auth'));
 app.use('/api/centres', require('./routes/centres'));
@@ -73,4 +89,9 @@ async function start() {
   });
 }
 
-start().catch(console.error);
+// In local execution, start listening directly
+if (process.env.NODE_ENV !== 'test' && !process.env.VERCEL) {
+  start().catch(console.error);
+}
+
+module.exports = app;

@@ -4,6 +4,7 @@ let db;
 let client;
 
 async function connectDB() {
+  if (db) return db;
   try {
     const mongoUri = process.env.MONGODB_URL || 'mongodb://localhost:27017';
     client = await MongoClient.connect(mongoUri);

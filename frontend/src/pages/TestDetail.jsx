@@ -7,7 +7,7 @@ import {
 } from 'lucide-react';
 import ResultBadge from '../components/ResultBadge';
 
-const API = import.meta.env.VITE_BACKEND_URL;
+const API = import.meta.env.VITE_BACKEND_URL || '';
 
 function InfoRow({ label, value, mono }) {
   return (
